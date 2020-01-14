@@ -50,9 +50,8 @@ try {
     user.password = await bcrypt.hash(password, salt)
 
     await user.save()
+
     // Return jsonwebtoken
-
-
     const payload = {
         user: {
             id: user.id
@@ -65,6 +64,7 @@ try {
         if(err) throw err;
         res.json({ token })
     } )
+    
 }
 catch(err) {
  console.log(err.massage);
