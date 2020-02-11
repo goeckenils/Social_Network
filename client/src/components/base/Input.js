@@ -1,0 +1,50 @@
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
+
+const Input = props => {
+  return (
+    <Wrapper>
+      <Label>{props.name}</Label>
+      <PureInput
+        placeholder={props.placeholder}
+        type={props.type}
+        value={props.value}
+        onChange={props.onChange}
+      ></PureInput>
+    </Wrapper>
+  );
+};
+
+export default Input;
+
+const Wrapper = styled.div`
+  position: relative;
+  padding: 5px;
+  margin-bottom: 10px;
+`;
+
+const PureInput = styled.input`
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 25px;
+  padding-bottom: 5px;
+  border-radius: 4px;
+  border: 1px solid #b4bece;
+  color: #b4bece;
+  font-size: 14px;
+  width: 100%;
+  &::placeholder {
+    color: #b4bece;
+  }
+  &:focus {
+    outline-color: #fc7560;
+  }
+`;
+
+const Label = styled.label`
+  position: absolute;
+  font-size: 12px;
+  color: #b4bece;
+  top: 15px;
+  left: 25px;
+`;
