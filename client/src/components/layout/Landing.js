@@ -9,8 +9,31 @@ const Landing = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const login = (email, password) => {
+    const data = {
+      email,
+      password,
+    };
+
+    fetch('/api/auth', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(data => {
+        window.localStorage.setItem('x-auth-token', JSON.stringify(data.token));
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
+    login(email, password);
   };
   return (
     <LandingContainer>
@@ -88,9 +111,4 @@ const TextWrapper = styled.div``;
 
 const Orange = styled.span`
   color: #fc7560;
-`;
-const FlexWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
