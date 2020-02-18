@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 const Input = props => {
@@ -9,6 +9,7 @@ const Input = props => {
         placeholder={props.placeholder}
         type={props.type}
         value={props.value}
+        error={props.error}
         onChange={props.onChange}
       ></PureInput>
     </Wrapper>
@@ -29,7 +30,7 @@ const PureInput = styled.input`
   padding-top: 25px;
   padding-bottom: 5px;
   border-radius: 4px;
-  border: 1px solid #b4bece;
+  border: ${props => `1px solid ${props.error ? '#fc7560' : '#b4bece'}`};
   color: #b4bece;
   font-size: 14px;
   width: 100%;

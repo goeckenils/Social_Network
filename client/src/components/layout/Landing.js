@@ -65,7 +65,9 @@ const Landing = () => {
             <Button marginRight="5px" type="submit">
               Login
             </Button>
-            <Secondary marginLeft="5px">Register</Secondary>
+            <Secondary to="/register" marginLeft="5px">
+              Register
+            </Secondary>
           </ButtonWrapper>
         </LoginForm>
       </LoginWrapper>
