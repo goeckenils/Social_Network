@@ -3,14 +3,19 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const Alert = ({ alerts }) =>
-  alerts !== null &&
-  alerts.length > 0 &&
-  alerts.map(alert => (
-    <AlertContainer alertType={alert.alertType} key={alert.id}>
-      {alert.msg}
-    </AlertContainer>
-  ));
+const Alert = ({ alerts }) => {
+  const makeAlert =
+    alerts !== null &&
+    alerts.length > 0 &&
+    alerts.map(alert => (
+      <AlertContainer alertType={alert.alertType} key={alert.id}>
+        {console.log(alert.alertType)}
+        {alert.msg}
+      </AlertContainer>
+    ));
+
+  return <Wrapper>{makeAlert}</Wrapper>;
+};
 
 Alert.propTypes = {
   alerts: PropTypes.array.isRequired,
@@ -30,11 +35,9 @@ const AlertContainer = styled.div`
       : null || props.alertType === 'success'
       ? '#28a745'
       : null};
-  position: absolute;
   color: #ffffff;
-  left: 20px;
-  top: 20px;
   display: flex;
+  margin-top: 15px;
   justify-content: center;
   align-items: center;
   transition: all 0.5s ease-out;
@@ -42,4 +45,9 @@ const AlertContainer = styled.div`
   -webkit-box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.16);
   -moz-box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.16);
   box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.16);
+`;
+const Wrapper = styled.div`
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
 `;

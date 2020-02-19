@@ -77,7 +77,7 @@ const Register = ({ setAlert, register }) => {
             onChange={e => setPassword2(e.target.value)}
             value={password2}
             error={error}
-            name="Password"
+            name="Confirm Password"
             type="password"
             placeholder="********"
           />
