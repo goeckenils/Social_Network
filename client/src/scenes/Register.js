@@ -4,20 +4,19 @@ import Logo from '../components/img/Logo.svg';
 import { H1 } from '../components/base/headings';
 import Input from '../components/base/Input';
 import Button, { Secondary } from '../components/base/Button';
-import { useHistory, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { setAlert } from '../actions/alert';
 import { register } from '../actions/auth';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [error, setError] = React.useState(false);
-  let history = useHistory();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -29,6 +28,10 @@ const Register = ({ setAlert, register }) => {
       setError(true);
     }
   };
+  // Redirect if Logged in
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
   return (
     <LandingContainer>
       <LoginWrapper>
@@ -98,12 +101,20 @@ const Register = ({ setAlert, register }) => {
   );
 };
 
+const mapStateToProps = state => ({
+  isAuthenticated: state.register.isAuthenticated,
+});
+
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
-export default connect(null, { setAlert, register })(Register);
+export default connect(mapStateToProps, {
+  setAlert,
+  register,
+})(Register);
 
 const LandingContainer = styled.div`
   display: flex;
